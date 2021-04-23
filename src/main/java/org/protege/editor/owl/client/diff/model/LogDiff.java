@@ -202,6 +202,10 @@ public class LogDiff {
             String userId = diffManager.getSelectedAuthor();
             changes = getChangesForUser(userId);
         }
+        else if(event.equals(LogDiffEvent.CHANGE_SELECTION_CHANGED)) {
+        	changes = diffManager.getSelectedChanges();
+        	
+        }
         else if(event.equals(LogDiffEvent.COMMIT_SELECTION_CHANGED)) {
             CommitMetadata metadata = diffManager.getSelectedCommit();
             Collection<ChangeId> dateChangeIds = changesByDate.get(metadata.getDate());

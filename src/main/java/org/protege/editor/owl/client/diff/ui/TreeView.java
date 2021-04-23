@@ -49,6 +49,9 @@ public class TreeView extends AbstractOWLClassHierarchyViewComponent {
 			if(event.equals(LogDiffEvent.COMMIT_SELECTION_CHANGED)) {
                 diffManager.clearSelectedChanges();
                 updateDiff(event);                
+            } else if (event.equals(LogDiffEvent.CHANGE_SELECTION_CHANGED))  {
+            	updateDiff(event); 
+            	
             } else {
             	
             }

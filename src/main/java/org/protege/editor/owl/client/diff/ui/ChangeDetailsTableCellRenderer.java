@@ -29,13 +29,28 @@ public class ChangeDetailsTableCellRenderer extends LogDiffCellRenderer {
         super(editorKit);
         this.modelManager = editorKit.getOWLModelManager();
     }
+    
+    private String fix(OWLAxiom ax, String s) {
+    	if (ax instanceof OWLAnnotationAssertionAxiom) {
+    		OWLAnnotationAssertionAxiom aax = (OWLAnnotationAssertionAxiom) ax;
+    		if (aax.isAnnotated()) {
+    			for (OWLAnnotation ann : aax.getAnnotations()) {
+    				s += "\n\t" + ann.getProperty().getIRI().getFragment() 
+    						+ "\t" + ann.getValue().asLiteral().get().getLiteral();
+    			}
+    		}
+    		
+    	}
+    	return s;
+    	
+    }
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         ChangeMode mode = LogDiff.getChangeMode((OWLOntologyChange)value);
         if (value instanceof OWLAxiomChange) {
             OWLAxiom ax = ((OWLAxiomChange)value).getAxiom();
-            setText(modelManager.getRendering(ax));
+            setText(fix(ax, modelManager.getRendering(ax)));
             setToolTipText(modelManager.getRendering(ax));
         }
         else if(value instanceof AnnotationChange) {

@@ -44,7 +44,6 @@ public class CommitPanel extends JPanel implements Disposable {
 
         JScrollPane scrollPane = new JScrollPane(commitList);
         scrollPane.setBorder(GuiUtils.EMPTY_BORDER);
-        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         add(scrollPane, BorderLayout.CENTER);
         listCommits(LogDiffEvent.ONTOLOGY_UPDATED);
     }
@@ -70,7 +69,7 @@ public class CommitPanel extends JPanel implements Disposable {
         commitList.addListSelectionListener(listSelectionListener);
         commitList.setCellRenderer(new CommitListCellRenderer());
         commitList.setFixedCellHeight(45);
-        commitList.setFixedCellWidth(this.getWidth());
+        //commitList.setFixedCellWidth(this.getWidth());
         commitList.setBorder(GuiUtils.MATTE_BORDER);
     }
 
